@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         val room = findViewById<EditText>(R.id.text_room)
 
         switch(false)
+        menu(true)
 
         create.setOnClickListener {
             hideKeyboard()
@@ -62,7 +63,8 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
                     menu(true)
-                    Toast.makeText(this@MainActivity, "Unable to Connect to server", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "Unable to Connect to server ${e.message}", Toast.LENGTH_LONG)
+                        .show()
                 }
             }
 
@@ -99,9 +101,11 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
                     menu(true)
-                    Toast.makeText(this@MainActivity, "Unable to Connect to server", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "Unable to Connect to server ${e.message}", Toast.LENGTH_LONG)
+                        .show()
                 }
             }
+
             override fun onResponse(call: Call, response: Response) {
                 val data = response.body()?.string()
                 val code = response.code()
