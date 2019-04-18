@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PingPong</string>
+    <string name="ping">Ping</string>
+    <string name="game_room_name">Game Room Name</string>
+    <string name="create">Create</string>
+    <string name="join">Join</string>
+    <string name="host">Host</string>
+    <string name="ping_pong">Ping Pong</string>
+    <string name="ping_pong">Ping Pong</string>
+</resources>
