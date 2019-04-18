@@ -30,10 +30,10 @@ class MainActivity : AppCompatActivity() {
         val join = findViewById<Button>(R.id.btn_join)
         val ping = findViewById<Button>(R.id.btn_ping)
 
-        ping.visibility = View.INVISIBLE
-
         val host = findViewById<EditText>(R.id.text_host)
         val room = findViewById<EditText>(R.id.text_room)
+
+        switch(false)
 
         create.setOnClickListener {
             hideKeyboard()
@@ -59,7 +59,13 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    menu(true)
+                    Toast.makeText(this@MainActivity, "Unable to Connect to server", Toast.LENGTH_LONG).show()
+                }
+            }
+
             override fun onResponse(call: Call, response: Response) {
                 val data = response.body()?.string()
                 val code = response.code()
@@ -70,6 +76,7 @@ class MainActivity : AppCompatActivity() {
                         switch(true)
                     } else {
                         menu(true)
+                        Toast.makeText(this@MainActivity, "Error", Toast.LENGTH_LONG).show()
                     }
                 }
 
@@ -89,7 +96,12 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {}
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    menu(true)
+                    Toast.makeText(this@MainActivity, "Unable to Connect to server", Toast.LENGTH_LONG).show()
+                }
+            }
             override fun onResponse(call: Call, response: Response) {
                 val data = response.body()?.string()
                 val code = response.code()
